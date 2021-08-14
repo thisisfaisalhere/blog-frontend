@@ -48,7 +48,7 @@ axios.interceptors.response.use(
 
         if (tokenParts.exp > now) {
           return axios
-            .post("/user/token/refresh/", { refresh: refreshToken })
+            .post("api/user/token/refresh/", { refresh: refreshToken })
             .then((response) => {
               if (user) {
                 user.tokens.access = response.data.access;
