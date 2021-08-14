@@ -1,6 +1,7 @@
 import MDEditor from "@uiw/react-md-editor";
 import { useEffect, useState } from "react";
 import { IBlogDetails } from "../../helpers/interfaces";
+import "./PostEdit.styles.scss";
 
 const PostEditor: React.FC<{ savePost: Function; blog?: IBlogDetails }> = ({
   savePost,
@@ -67,34 +68,52 @@ const PostEditor: React.FC<{ savePost: Function; blog?: IBlogDetails }> = ({
         margin: "auto",
       }}
     >
-      <div style={{ marginTop: "1rem" }}>
+      <div className="formContainer">
+        <p className="pTag">Title</p>
         <input
           type="text"
           name="title"
           value={post.title}
+          className="inputField"
+          placeholder="Enter Post Title"
           onChange={(e) => onChange(e.target.name, e.target.value)}
         />
+        <p className="pTag">Intro to your blog</p>
         <textarea
           name="excerpt"
-          cols={30}
-          rows={10}
+          cols={80}
+          rows={8}
           value={post.excerpt}
+          className="textField"
           onChange={(e) => onChange(e.target.name, e.target.value)}
         ></textarea>
+
         <MDEditor
+          style={{ marginTop: "1rem" }}
           value={postBody}
           onChange={(value) => onChange("body", value)}
         />
+
+        <label>
+          <input
+            type="checkbox"
+            name="published"
+            value={post.published}
+            className="checkbox"
+            onChange={(e) => onChange(e.target.name, e.target.value)}
+          />
+          {"  "}Publish?
+        </label>
+        <p className="pTag">Thumbnail</p>
         <input
-          type="checkbox"
-          name="published"
-          value={post.published}
-          onChange={(e) => onChange(e.target.name, e.target.value)}
+          type="file"
+          name="thumbnail"
+          onChange={fileChangeHandler}
+          className="fileField"
         />
-        <input type="file" name="thumbnail" onChange={fileChangeHandler} />
         {thumbnail === "" && blog ? (
           <>
-            <p>Previous Thumbnail</p>
+            <p className="pTag">Previous Thumbnail</p>
             <img
               width={250}
               alt="thumbnail"
@@ -103,14 +122,16 @@ const PostEditor: React.FC<{ savePost: Function; blog?: IBlogDetails }> = ({
           </>
         ) : (
           <>
-            <p>Current Thumbnail</p>
+            <p className="pTag">Current Thumbnail</p>
             {thumbnail !== "" && (
               <img width={250} src={URL.createObjectURL(thumbnail)} alt="" />
             )}
           </>
         )}
-        <p>{error}</p>
-        <button onClick={handleSavePost}>Post</button>
+        <p className="pTag">{error}</p>
+        <button className="postBtn" onClick={handleSavePost}>
+          {blog ? "Edit" : "Save"}
+        </button>
       </div>
     </div>
   );
