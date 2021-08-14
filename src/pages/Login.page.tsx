@@ -25,7 +25,7 @@ const LoginPage = () => {
     if (user) {
       history.replace("/");
     }
-  });
+  }, [user, history]);
 
   const toggleLogin = () => {
     setIsLogin(!isLogin);

@@ -26,6 +26,7 @@ const Navbar = () => {
     try {
       await axios.post(`api/user/logout/`, { refresh: user?.tokens.refresh });
       store.dispatch(setCurrentUser(null));
+      history.replace("/");
     } catch (err) {
       console.log(err);
     }

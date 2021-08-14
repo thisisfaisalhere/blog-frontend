@@ -12,7 +12,7 @@ store.subscribe(() => {
   if (user)
     axios.defaults.headers.common[
       "Authorization"
-    ] = `JWT ${user.tokens.access}`;
+    ] = `Bearer ${user.tokens.access}`;
 });
 
 export const axios = axiosInstance.create({
@@ -55,10 +55,10 @@ axios.interceptors.response.use(
                 console.log("token refreshed");
                 axiosInstance.defaults.headers[
                   "Authorization"
-                ] = `JWT ${response.data.access}`;
+                ] = `Bearer ${response.data.access}`;
                 originalRequest.headers[
                   "Authorization"
-                ] = `JWT ${response.data.access}`;
+                ] = `Bearer ${response.data.access}`;
                 store.dispatch(setCurrentUser(user));
               }
               return axiosInstance(originalRequest);

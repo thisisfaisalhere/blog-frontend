@@ -13,7 +13,7 @@ export interface IBlogList {
   results: IBlog[];
 }
 
-interface IBlog {
+export interface IBlog {
   id: string;
   title: string;
   thumbnail: string;
@@ -21,6 +21,7 @@ interface IBlog {
   excerpt: string;
   author: string;
   published_on: Date;
+  published: boolean;
 }
 
 export interface IBlogDetails {
