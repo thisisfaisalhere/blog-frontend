@@ -1,0 +1,13 @@
+@import "../../helpers/mixins.scss";
+
+.navbar {
+  @include flexContainer(space-around, center);
+  flex-direction: row;
+
+  .logo {
+    width: 100px;
+    height: 31px;
+    background-color: grey;
+    color: white;
+  }
+}

@@ -1,0 +1,5 @@
+@mixin flexContainer($var1, $var2) {
+  display: flex;
+  justify-content: $var1;
+  align-items: $var2;
+}

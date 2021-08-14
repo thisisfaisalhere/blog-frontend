@@ -1,23 +1,26 @@
-import axios from "axios";
+import axiosInstance from "axios";
+import { IUser } from "../helpers/interfaces";
+import { store } from "../redux/store";
+import { setCurrentUser } from "../redux/user/user.actions";
 
 const url = process.env.REACT_APP_BACKEND_URL;
 
-let user = null;
+let user: IUser | null = null;
 
-// store.subscribe(async () => {
-//   user = await store.getState().user.currentUser;
-//   if (user)
-//     instance.defaults.headers.common[
-//       "Authorization"
-//     ] = `JWT ${user.tokens.access}`;
-// });
+store.subscribe(() => {
+  user = store.getState().user.currentUser;
+  if (user)
+    axios.defaults.headers.common[
+      "Authorization"
+    ] = `JWT ${user.tokens.access}`;
+});
 
-const instance = axios.create({
+export const axios = axiosInstance.create({
   baseURL: url,
   timeout: 5000,
 });
 
-instance.interceptors.response.use(
+axios.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -44,21 +47,21 @@ instance.interceptors.response.use(
         console.log(tokenParts.exp);
 
         if (tokenParts.exp > now) {
-          return instance
+          return axios
             .post("/user/token/refresh/", { refresh: refreshToken })
             .then((response) => {
-              // user.tokens.access = response.data.access;
-              // console.log("token refreshed");
-              // axios.defaults.headers[
-              //   "Authorization"
-              // ] = `JWT ${response.data.access}`;
-              // originalRequest.headers[
-              //   "Authorization"
-              // ] = `JWT ${response.data.access}`;
-              // store.dispatch(setCurrentUser(user));
-
-              // todo: set user tokens
-              return axios(originalRequest);
+              if (user) {
+                user.tokens.access = response.data.access;
+                console.log("token refreshed");
+                axiosInstance.defaults.headers[
+                  "Authorization"
+                ] = `JWT ${response.data.access}`;
+                originalRequest.headers[
+                  "Authorization"
+                ] = `JWT ${response.data.access}`;
+                store.dispatch(setCurrentUser(user));
+              }
+              return axiosInstance(originalRequest);
             })
             .catch((err) => {
               console.log(err);
@@ -66,18 +69,14 @@ instance.interceptors.response.use(
         } else {
           console.log("Refresh token is expired", tokenParts.exp, now);
           alert("Token has Expired you need to login again");
-
-          // todo: navigate to login page
+          window.location.href = "/login";
         }
       } else {
         console.log("Refresh token not available.");
-
-        // todo: navigate to login page
+        window.location.href = "/login";
       }
     }
 
     return Promise.reject(error);
   }
 );
-
-export default instance;
