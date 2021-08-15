@@ -1,4 +1,10 @@
-# Blog
+# Blog Application
+
+-- blog application frontend
+
+## Application Hosted at AWS
+
+IP `15.206.189.128`
 
 ## Requirements
 
