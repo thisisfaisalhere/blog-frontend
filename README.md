@@ -31,11 +31,11 @@ Frontend is written in ReactJs
 
 ### Library used
 
-1. For ajax calls [axios]()
-2. Design library [antd]()
-3. For state manangement [redux]()
-4. For debugging redux states [redux-logger]()
-5. For Persisting data in local storage [redux-persist]()
+1. For ajax calls [axios](https://www.npmjs.com/package/axios)
+2. Design library [antd](https://ant.design/)
+3. For state manangement [redux](https://redux.js.org/)
+4. For debugging redux states [redux-logger](https://www.npmjs.com/package/redux-logger)
+5. For Persisting data in local storage [redux-persist](https://www.npmjs.com/package/redux-persist)
 6. misc:
-   - [sass]()
-   - [react-md-editor]()
+   - [sass](https://www.npmjs.com/package/sass)
+   - [react-md-editor](https://www.npmjs.com/package/@uiw/react-md-editor)
