@@ -48,7 +48,6 @@ const CommentComponent: React.FC<{ id: string }> = ({ id }) => {
   const handleSubmit = async (value: string, setValue: any) => {
     if (value.length > 0) {
       setSubmitting(true);
-      console.log(axios.defaults.headers);
       try {
         const { data } = await axios.post("api/blog/c/comment/", {
           comment: value,

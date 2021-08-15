@@ -10,7 +10,7 @@ const PostEditor: React.FC<{ savePost: Function; blog?: IBlogDetails }> = ({
   const [post, setPost] = useState({
     title: "",
     excerpt: "",
-    published: "",
+    published: "Draft",
   });
   const [postBody, setPostBody] = useState("");
   const [thumbnail, setThumbnail] = useState("");
@@ -34,7 +34,6 @@ const PostEditor: React.FC<{ savePost: Function; blog?: IBlogDetails }> = ({
 
   const fileChangeHandler = (e: any) => {
     const file = e.target.files[0];
-    console.log(file);
     if (file.size > 2048000) setError("File size more than 2mb");
     else {
       if (
@@ -55,7 +54,7 @@ const PostEditor: React.FC<{ savePost: Function; blog?: IBlogDetails }> = ({
     formData.append("body", postBody);
     formData.append("title", post.title);
     formData.append("excerpt", post.excerpt);
-    formData.append("published", post.published.toString());
+    formData.append("published", post.published);
 
     savePost(formData);
   };
@@ -95,13 +94,14 @@ const PostEditor: React.FC<{ savePost: Function; blog?: IBlogDetails }> = ({
         />
 
         <label>
-          <input
-            type="checkbox"
+          <select
+            className="selectField"
             name="published"
-            value={post.published}
-            className="checkbox"
             onChange={(e) => onChange(e.target.name, e.target.value)}
-          />
+          >
+            <option value="Draft">Draft</option>
+            <option value="Published">Published</option>
+          </select>
           {"  "}Publish?
         </label>
         <p className="pTag">Thumbnail</p>

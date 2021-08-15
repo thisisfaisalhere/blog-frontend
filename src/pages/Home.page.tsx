@@ -14,7 +14,6 @@ const HomePage = () => {
       try {
         const { data } = await axios.get("/api/blog/");
         if (data) {
-          console.log(data);
           setBlogList(data);
         }
       } catch (err) {

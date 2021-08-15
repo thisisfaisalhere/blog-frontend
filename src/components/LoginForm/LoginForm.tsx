@@ -10,11 +10,9 @@ const LoginForm: React.FC<{ toggleLogin: MouseEventHandler<HTMLSpanElement> }> =
     const history = useHistory();
 
     const onFinish = async (values: any) => {
-      console.log(values);
       try {
         const { data } = await axios.post("api/user/login/", values);
         if (data) {
-          console.log(data);
           store.dispatch(setCurrentUser(data));
           history.replace("/profile");
         }

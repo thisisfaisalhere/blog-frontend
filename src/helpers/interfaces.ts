@@ -21,7 +21,7 @@ export interface IBlog {
   excerpt: string;
   author: string;
   published_on: Date;
-  published: boolean;
+  published: "Draft" | "Published";
 }
 
 export interface IBlogDetails {
@@ -31,7 +31,7 @@ export interface IBlogDetails {
   slug: string;
   excerpt: string;
   body: string;
-  published: string;
+  published: "Draft" | "Published";
   author: string;
   published_on: Date;
 }

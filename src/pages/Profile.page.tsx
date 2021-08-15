@@ -28,18 +28,11 @@ const ProfilePage = () => {
     setUser(updatedUser);
   }, [history]);
 
-  // useEffect(() => {
-  //   if (!user) {
-  //     history.replace("/");
-  //   }
-  // });
-
   // getting user post
   useEffect(() => {
     const getData = async () => {
       try {
         const { data } = await axios.get("api/blog/edit/");
-        console.log(data);
         setUserBlogs(data);
       } catch (err) {
         console.log(err);

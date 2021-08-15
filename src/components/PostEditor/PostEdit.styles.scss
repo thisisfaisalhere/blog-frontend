@@ -19,8 +19,19 @@
     width: 100%;
   }
 
-  .checkbox {
+  .selectField {
     margin-top: 1rem;
+    padding: 0.25em;
+    border: 0;
+    border-bottom: 2px solid currentcolor;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    border-radius: 0;
+    &:focus,
+    &:active {
+      outline: 0;
+      border-bottom-color: red;
+    }
   }
 
   .postBtn {

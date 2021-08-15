@@ -14,7 +14,6 @@ const BlogDetailPage = () => {
     const getData = async () => {
       try {
         const { data } = await axios.get(`/api/blog/${slug}`);
-        console.log(data);
         setBlog(data);
       } catch (err) {
         console.log(err);
